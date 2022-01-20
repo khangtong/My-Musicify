@@ -24,6 +24,9 @@
     position: relative;
     max-width: 480px;
     margin: 0 auto;
+    background-image: linear-gradient( 0deg, rgb(249 252 255) 11.2%, rgb(244 248 252) 91.1% );
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
   
   .player .icon-pause {
@@ -45,7 +48,7 @@
   
   .dashboard {
     padding: 16px 16px 14px;
-    background: #e9eef6;
+    background-image: linear-gradient( 180deg,  rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1% );
     backdrop-filter: blur(10px) saturate(80%);
     position: fixed;
     top: 0;
@@ -145,7 +148,6 @@
   .playlist {
     margin-top: 401px;
     padding: 12px;
-    background: #e9eef6;
     backdrop-filter: blur(10px) saturate(80%);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -156,7 +158,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 12px;
-    background-color: #fff;
+    background-color: #fafafa;
     padding: 8px 16px;
     border-radius: 5px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
