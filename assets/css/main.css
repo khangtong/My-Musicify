@@ -19,14 +19,19 @@
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
+
+  .video-bg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+  }
   
   .player {
     position: relative;
     max-width: 480px;
     margin: 0 auto;
-    background-image: linear-gradient( 0deg, rgb(249 252 255) 11.2%, rgb(244 248 252) 91.1% );
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
   }
   
   .player .icon-pause {
@@ -48,14 +53,13 @@
   
   .dashboard {
     padding: 16px 16px 14px;
-    background-image: linear-gradient( 180deg,  rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1% );
-    backdrop-filter: blur(10px) saturate(80%);
+    background-color: rgb(255 255 255 / 16%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: fixed;
     top: 0;
     width: 100%;
     max-width: 480px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
     box-shadow: 0 -30px 30px rgb(0 0 0 / 10%);
     z-index: 2;
   }
@@ -72,7 +76,7 @@
   }
   
   header h2 {
-    color: var(--text-color);
+    color: #333;
     font-size: 20px;
   }
   
@@ -101,7 +105,7 @@
   }
   
   .control .btn {
-    color: #666;
+    color: #494949;
     padding: 18px;
     font-size: 18px;
     cursor: pointer;
@@ -148,11 +152,11 @@
   
   /* PLAYLIST */
   .playlist {
-    margin-top: 401px;
+    margin-top: 399px;
+    background-color: rgb(255 255 255 / 31%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 12px;
-    backdrop-filter: blur(10px) saturate(80%);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
     box-shadow: 0 30px 30px rgb(0 0 0 / 10%);
   }
   
