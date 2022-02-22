@@ -26,6 +26,16 @@
     height: 100vh;
     right: 0;
     top: 0;
+    bottom: 0;
+    left: 0;
+    object-fit: contain;
+  }
+
+  @media (min-width: 769px) and (max-width: 979px) {
+    .playlist {
+      max-height: 679px;
+      overflow-y: auto;
+    }
   }
   
   .player {
