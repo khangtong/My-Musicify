@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musicify</title>
     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/icons/fontawesome-free-6.0.0-beta3-web/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="shortcut icon" href="#">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -48,9 +50,16 @@
             <i class="fas fa-random"></i>
           </div>
         </div>
-    
-        <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
-    
+        <div class="progress-wrap">
+          <div class="cur-time">00:00</div>
+          <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+          <div class="total-duration">00:00</div>
+        </div>
+        <div class="volume-wrap">
+          <i class="fa-solid fa-volume-low vol-icon"></i>
+          <input id="volume" class="volume" type="range" value="100" step="1" min="0" max="100">
+          <i class="fa-solid fa-volume-high vol-icon"></i>
+        </div>
         <audio id="audio" src=""></audio>
       </div>
     
@@ -119,6 +128,9 @@
         const playlist = $('.playlist')
         const playBtn = $('.btn-toggle-play')
         const progress = $('#progress')
+        const curTime = $('.cur-time')
+        const totalDuration = $('.total-duration')
+        const volume = $('#volume')
         const nextBtn = $('.btn-next')
         const prevBtn = $('.btn-prev')
         const randomBtn = $('.btn-random')
@@ -267,10 +279,17 @@
             }
 
             // Khi song được play
-            audio.onplay = function() {
+            audio.onplay = function(e) {
               _this.isPlaying = true
               player.classList.add('playing')
               cdThumbAnimate.play()
+              // var audioDurationMs = Math.floor(e.target.duration / 60)
+              // var audioDurationSec = Math.floor(((e.target.duration / 60) - audioDurationMs) * 60)
+              // if (audioDurationSec <= 9) {
+              //   console.log(`${audioDurationMs}:0${audioDurationSec}`)
+              // } else {
+              //   console.log(`${audioDurationMs}:${audioDurationSec}`)
+              // }
             }
 
             // Khi song bị pause
@@ -286,6 +305,8 @@
                 const progressPercent = Math.floor(audio.currentTime / audio.duration * 100)
 
                 progress.value = progressPercent
+
+                _this.timeUpdate()
               }
             }
 
@@ -293,6 +314,12 @@
             progress.onchange = function(e) {
               const seekTime = Math.floor(e.target.value / 100 * audio.duration)
               audio.currentTime = seekTime
+            }
+
+            // Xử lý thay doi am luong song
+            volume.oninput = function(e) {
+              const seekVolume = e.target.value / 100
+              audio.volume = seekVolume
             }
 
             // Khi next song
@@ -378,6 +405,25 @@
             cdThumb.style.backgroundImage = `url(${this.currentSong.image})`
             audio.src = this.currentSong.path
           },
+          // Xu ly hien thi thoi gian theo thoi gian hien tai cua bai hat va thoi luong bai hat
+          timeUpdate: function() {
+            if (!isNaN(audio.duration)) {
+              let curMinutes = Math.floor(audio.currentTime / 60)
+              let curSeconds = Math.floor(audio.currentTime % 60)
+              let durMinutes = Math.floor(audio.duration / 60)
+              let durSeconds = Math.floor(audio.duration % 60)
+
+              if (curSeconds < 10) {
+                curSeconds = '0' + curSeconds
+              }
+              if (durSeconds < 10) {
+                durSeconds = '0' + durSeconds
+              }
+
+              curTime.textContent = `${curMinutes}:${curSeconds}`
+              totalDuration.textContent = `${durMinutes}:${durSeconds}`
+            }
+          },
           nextSong: function() {
             this.currentIndex++
             if (this.currentIndex >= this.songs.length) {
@@ -401,12 +447,19 @@
             this.currentIndex = newIndex
             this.loadCurrentSong()
           },
+          resetValues: function() {
+            curTime.textContent = "0:00";
+            totalDuration.textContent = "0:00";
+          },
           start: function() {
             // Gán cấu hình từ config vào ứng dụng
             this.loadConfig()
 
             // Định nghĩa các thuộc tính cho object
             this.defineProperties()
+
+            // Reset value cua curTime va totalDuration ve ban dau
+            this.resetValues()
 
             // Lắng nghe / xử lý những sự kiện (DOM events)
             this.handleEvents()

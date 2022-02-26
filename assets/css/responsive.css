@@ -1,0 +1,13 @@
+@media (max-width: 740px) {
+    .dashboard, .playlist {
+        box-shadow: none;
+    }
+
+    .progress {
+        margin: 0 9px 1px 5px;
+    }
+
+    .volume-wrap {
+        margin-top: 5px;
+    }
+}
