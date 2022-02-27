@@ -183,7 +183,26 @@
 
   .volume {
     width: 70%;
-    margin: 0 7px;
+    margin: 0 7px 0 5px;
+  }
+
+  .toggle-low-mute-vol {
+    height: 24px;
+    width: 21px;
+    position: relative;
+    margin-top: 3px;
+  }
+
+  .fa-volume-low.muted {
+    display: none;
+  }
+
+  .vol-icon.fa-volume-xmark {
+    display: none;
+  } 
+
+  .fa-volume-xmark.muted {
+    display: block;
   }
   
   /* PLAYLIST */

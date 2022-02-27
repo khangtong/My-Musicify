@@ -56,7 +56,10 @@
           <div class="total-duration">00:00</div>
         </div>
         <div class="volume-wrap">
-          <i class="fa-solid fa-volume-low vol-icon"></i>
+          <div class="toggle-low-mute-vol">
+            <i class="fa-solid fa-volume-low vol-icon"></i>
+            <i class="fa-solid fa-volume-xmark vol-icon"></i>
+          </div>
           <input id="volume" class="volume" type="range" value="100" step="1" min="0" max="100">
           <i class="fa-solid fa-volume-high vol-icon"></i>
         </div>
@@ -131,6 +134,8 @@
         const curTime = $('.cur-time')
         const totalDuration = $('.total-duration')
         const volume = $('#volume')
+        const volIconLow = $('.vol-icon.fa-volume-low')
+        const volIconMute = $('.vol-icon.fa-volume-xmark')
         const nextBtn = $('.btn-next')
         const prevBtn = $('.btn-prev')
         const randomBtn = $('.btn-random')
@@ -139,6 +144,7 @@
 
         const app = {
           currentIndex: 0,
+          audioVolume: 0,
           isPlaying: false,
           isRandom: false,
           isRepeat: false,
@@ -283,13 +289,7 @@
               _this.isPlaying = true
               player.classList.add('playing')
               cdThumbAnimate.play()
-              // var audioDurationMs = Math.floor(e.target.duration / 60)
-              // var audioDurationSec = Math.floor(((e.target.duration / 60) - audioDurationMs) * 60)
-              // if (audioDurationSec <= 9) {
-              //   console.log(`${audioDurationMs}:0${audioDurationSec}`)
-              // } else {
-              //   console.log(`${audioDurationMs}:${audioDurationSec}`)
-              // }
+              audio.volume = volume.value / 100
             }
 
             // Khi song bị pause
@@ -320,6 +320,14 @@
             volume.oninput = function(e) {
               const seekVolume = e.target.value / 100
               audio.volume = seekVolume
+              if (audio.volume == 0) {
+                volIconLow.classList.add("muted")
+                volIconMute.classList.add("muted")
+              } else {
+                volIconLow.classList.remove("muted")
+                volIconMute.classList.remove("muted")
+              }
+              _this.setConfig('volume', e.target.value)
             }
 
             // Khi next song
@@ -391,6 +399,7 @@
           loadConfig: function() {
             this.isRandom = this.config.isRandom
             this.isRepeat = this.config.isRepeat
+            this.audioVolume = this.config.volume
           },
           scrollSongIntoView: function() {
             setTimeout(function() {
@@ -470,9 +479,10 @@
             // Render playlist
             this.render();
 
-            // Hiển thị trạng thái ban đầu của button repeat & random
+            // Hiển thị trạng thái trc khi thoat của button repeat & random & volume
             randomBtn.classList.toggle('active', this.isRandom)
             repeatBtn.classList.toggle('active', this.isRepeat)
+            volume.setAttribute(`value`, Number(this.audioVolume))
           }
         }
         app.start()

@@ -1,6 +1,11 @@
-@media (max-width: 740px) {
+/* Mobile */
+@media (max-width: 46.25em) {
     .dashboard, .playlist {
         box-shadow: none;
+    }
+
+    .playlist {
+        padding: 24px 12px 12px 12px;
     }
 
     .progress {
