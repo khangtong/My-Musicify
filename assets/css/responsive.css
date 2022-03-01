@@ -1,5 +1,15 @@
 /* Mobile */
 @media (max-width: 46.25em) {
+    .dark-light {
+        top: 10px;
+        left: 10px;
+        background-color: transparent;
+    }
+
+    body.light-mode .dark-light {
+        background-color: transparent;
+    }
+
     .dashboard, .playlist {
         box-shadow: none;
     }

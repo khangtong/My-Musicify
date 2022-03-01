@@ -13,6 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="dark-light">
+      <i class="fa-solid fa-sun light-icon"></i>
+      <i class="fa-solid fa-moon dark-icon"></i>
+    </div>
     <div class="video-bg">
       <video src="./assets/videos/7btrrd.mp4" autoplay loop muted></video>
     </div>
@@ -123,6 +127,8 @@
 
         const PLAYER_STORAGE_KEY = 'Musicify-Player'
 
+        const body = $('body') 
+        const toggleDarkLight = $('.dark-light')
         const player = $('.player')
         const cd = $('.cd')
         const heading = $('header h2')
@@ -255,6 +261,11 @@
           handleEvents: function() {
             const _this = this;
             const cdWidth = cd.offsetWidth
+
+            // Xu li chuyen doi giao dien dark va light 
+            toggleDarkLight.onclick = function () {
+              body.classList.toggle('light-mode')
+            }
 
             // Xử lý CD quay và dừng
             const cdThumbAnimate = cdThumb.animate([
