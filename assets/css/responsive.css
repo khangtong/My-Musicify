@@ -1,28 +1,37 @@
 /* Mobile */
 @media (max-width: 46.25em) {
-    .dark-light {
-        top: 10px;
-        left: 10px;
-        background-color: transparent;
-    }
+  .dark-light {
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+  }
 
-    body.light-mode .dark-light {
-        background-color: transparent;
-    }
+  body.light-mode .dark-light {
+    background-color: transparent;
+  }
 
-    .dashboard, .playlist {
-        box-shadow: none;
-    }
+  .dashboard,
+  .playlist {
+    box-shadow: none;
+  }
 
-    .playlist {
-        padding: 24px 12px 12px 12px;
-    }
+  .playlist {
+    padding: 24px 12px 12px 12px;
+  }
 
-    .progress {
-        margin: 0 9px 1px 5px;
-    }
+  .progress {
+    margin: 0 9px 1px 5px;
+  }
 
-    .volume-wrap {
-        margin-top: 5px;
-    }
+  .volume-wrap {
+    margin-top: 5px;
+  }
+}
+
+/* Mobile & Tablet */
+@media (max-width: 64em) {
+  .btn.btn-prev:hover,
+  .btn.btn-next:hover {
+    color: #494949 !important;
+  }
 }
