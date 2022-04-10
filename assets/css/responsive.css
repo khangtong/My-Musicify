@@ -34,4 +34,8 @@
   .btn.btn-next:hover {
     color: #494949 !important;
   }
+
+  .line {
+    margin-left: 0.04rem;
+  }
 }

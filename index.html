@@ -283,6 +283,11 @@
                 <div class="song ${
                   index === this.currentIndex ? "active" : ""
                 }" data-index="${index}">
+                  <div class="line-wrapper">
+                    <div class="line line--1"></div>
+                    <div class="line line--2"></div>
+                    <div class="line line--3"></div>
+                  </div>
                   <div class="thumb" style="background-image: url('${
                     song.image
                   }')">
@@ -353,6 +358,15 @@
             player.classList.add("playing");
             cdThumbAnimate.play();
             audio.volume = volume.value / 100;
+            const songsList = $$(".song");
+            songsList.forEach(function (song) {
+              if (song.classList.contains("active")) {
+                console.dir(song);
+                song.children[1].style.display = "none";
+                song.children[0].style.display = "flex";
+                song.children[2].style = "margin-left: 6rem;";
+              }
+            });
           };
 
           // Khi song bị pause
@@ -360,6 +374,15 @@
             _this.isPlaying = false;
             player.classList.remove("playing");
             cdThumbAnimate.pause();
+            const songsList = $$(".song");
+            songsList.forEach(function (song) {
+              if (song.classList.contains("active")) {
+                console.dir(song);
+                song.children[1].style.display = "initial";
+                song.children[0].style.display = "none";
+                song.children[2].style = "margin-left: unset;";
+              }
+            });
           };
 
           // Khi tiến độ bài hát thay đổi

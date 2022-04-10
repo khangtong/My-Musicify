@@ -29,6 +29,7 @@ html {
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  font-size: 62.5%;
 }
 
 .video-bg {
@@ -281,7 +282,7 @@ input[type="range"] {
   background: #fff0;
   color: #5c87fe;
   font-size: 1.5rem;
-  --thumb-height: 0.825em;
+  --thumb-height: 1.125em;
   --track-height: 0.125em;
   --track-color: #dfdfdf;
   --clip-edges: 0.125em;
@@ -512,6 +513,57 @@ body.light-mode .playlist {
 .song.active .author,
 .song.active .title {
   color: #fff;
+}
+
+.line-wrapper {
+  position: absolute;
+  background-color: transparent;
+  top: 50%;
+  left: 2.9rem;
+  transform: translateY(-50%);
+  height: 58%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow-y: none;
+  display: none;
+}
+
+.line {
+  --line-dance-height: 2rem;
+  height: var(--line-dance-height);
+  width: 1rem;
+  background-image: linear-gradient(to top, #ecf0f1, #bfd7ed);
+  margin: 0.07rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+@keyframes dance {
+  0% {
+    height: var(--line-dance-height);
+  }
+
+  50% {
+    height: calc(var(--line-dance-height) * 2);
+  }
+
+  100% {
+    height: var(--line-dance-height);
+  }
+}
+
+.line--1 {
+  animation: dance 1.75s ease infinite 0.1s;
+}
+
+.line--2 {
+  animation: dance 1.75s ease infinite 0.6s;
+}
+
+.line--3 {
+  animation: dance 1.75s ease infinite 1s;
 }
 
 .song .thumb {
