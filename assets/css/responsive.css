@@ -31,10 +31,6 @@
     margin-top: 5px;
   }
 
-  .song:hover {
-    top: 0;
-  }
-
   .song .title {
     line-height: 1.2;
   }
@@ -49,6 +45,10 @@
   .btn.btn-prev:hover,
   .btn.btn-next:hover {
     color: #494949 !important;
+  }
+
+  .song:hover {
+    top: 0;
   }
 
   .line {
