@@ -486,7 +486,7 @@ body.light-mode .playlist {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  background-color: #fafafa;
+  background-color: #3c3c3c;
   padding: 8px 16px;
   border-radius: 5px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
@@ -496,13 +496,17 @@ body.light-mode .playlist {
   transition: all linear 0.12s;
 }
 
+body.light-mode .song {
+  background-color: #fafafa;
+}
+
 .song:hover {
   top: -5px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
 .song.active {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
   cursor: pointer;
 }
 
@@ -513,7 +517,7 @@ body.light-mode .playlist {
 .song.active .option,
 .song.active .author,
 .song.active .title {
-  color: #fff;
+  color: #fff !important;
 }
 
 .line-wrapper {
@@ -583,6 +587,10 @@ body.light-mode .playlist {
 
 .song .title {
   font-size: 18px;
+  color: #fff;
+}
+
+body.light-mode .song .title {
   color: var(--text-color);
 }
 
@@ -594,5 +602,43 @@ body.light-mode .playlist {
 .song .option {
   padding: 16px 8px;
   color: #999;
-  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  width: 14.6%;
+}
+
+.like-icon-box {
+  margin-right: 10px;
+}
+
+.like-icon--fill,
+.like-icon--outline {
+  width: 22px;
+  height: 22px;
+}
+
+.like-icon--fill {
+  display: none;
+}
+
+.like-icon-box.liked .like-icon--fill {
+  display: initial;
+}
+
+.song:not(.active) .option .like-icon-box.liked .like-icon--fill {
+  color: var(--primary-color);
+}
+
+.like-icon-box.liked .like-icon--outline {
+  display: none;
+}
+
+.download-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.download-icon {
+  width: 22px;
+  height: 22px;
 }

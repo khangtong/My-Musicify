@@ -202,6 +202,7 @@
         isRandom: false,
         isRepeat: false,
         isLightMode: false,
+        isLiked: [],
         config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
         songs: [
           {
@@ -301,7 +302,19 @@
                     <p class="author">${song.singer}</p>
                   </div>
                   <div class="option">
-                    <i class="fas fa-ellipsis-h"></i>
+                    <div class="like-icon-box">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 like-icon--fill" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 like-icon--outline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </div>
+                    <a href="${song.path}" download class="download-link">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 download-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </a>
                   </div>
                 </div>
               `;
@@ -365,7 +378,6 @@
             const songsList = $$(".song");
             songsList.forEach(function (song) {
               if (song.classList.contains("active")) {
-                console.dir(song);
                 song.children[1].style.display = "none";
                 song.children[0].style.display = "flex";
                 song.children[2].style = "margin-left: 6rem;";
@@ -381,7 +393,6 @@
             const songsList = $$(".song");
             songsList.forEach(function (song) {
               if (song.classList.contains("active")) {
-                console.dir(song);
                 song.children[1].style.display = "initial";
                 song.children[0].style.display = "none";
                 song.children[2].style = "margin-left: unset;";
@@ -474,18 +485,29 @@
           // Lắng nghe hành vi click vào playlist
           playlist.onclick = function (e) {
             const songNode = e.target.closest(".song:not(.active)");
-            if (songNode || e.target.closest(".option")) {
+            // Xử lý khi click vào option
+            if (e.target.closest(".option")) {
+              const likeSongBox = e.target.closest(".like-icon-box");
+              if (likeSongBox) {
+                likeSongBox.classList.toggle("liked");
+                const likedSongIndex = Number(
+                  e.target.closest(".song").dataset.index
+                );
+                if (!likeSongBox.classList.contains("liked")) {
+                  _this.isLiked = _this.isLiked.filter(
+                    (n) => n !== likedSongIndex
+                  );
+                } else {
+                  _this.isLiked.push(likedSongIndex);
+                }
+                _this.setConfig("isLiked", _this.isLiked);
+              }
+            } else if (songNode) {
               // Xử lý khi click vào song
-              if (songNode) {
-                _this.currentIndex = Number(songNode.dataset.index);
-                _this.loadCurrentSong();
-                _this.render();
-                audio.play();
-              }
-
-              // Xử lý khi click vào option
-              if (e.target.closest(".option")) {
-              }
+              _this.currentIndex = Number(songNode.dataset.index);
+              _this.loadCurrentSong();
+              _this.render();
+              audio.play();
             }
           };
         },
@@ -494,6 +516,7 @@
           this.isRepeat = this.config.isRepeat;
           this.audioVolume = this.config.volume;
           this.isLightMode = this.config.isLightMode;
+          this.isLiked = this.config.isLiked;
         },
         scrollSongIntoView: function () {
           setTimeout(function () {
@@ -577,7 +600,12 @@
           randomBtn.classList.toggle("active", this.isRandom);
           repeatBtn.classList.toggle("active", this.isRepeat);
           body.classList.toggle("light-mode", this.isLightMode);
-          volume.setAttribute(`value`, Number(this.audioVolume));
+          volume.setAttribute("value", Number(this.audioVolume));
+          this.config.isLiked.forEach(function (n) {
+            $$(".like-icon--fill")
+              [n].closest(".like-icon-box")
+              .classList.add("liked");
+          });
         },
       };
       app.start();
