@@ -31,6 +31,10 @@
     margin-top: 5px;
   }
 
+  .song:hover {
+    top: 0;
+  }
+
   .song .title {
     line-height: 1.2;
   }
