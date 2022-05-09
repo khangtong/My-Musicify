@@ -601,7 +601,7 @@
           repeatBtn.classList.toggle("active", this.isRepeat);
           body.classList.toggle("light-mode", this.isLightMode);
           volume.setAttribute("value", Number(this.audioVolume));
-          this.config.isLiked.forEach(function (n) {
+          this.isLiked.forEach(function (n) {
             $$(".like-icon--fill")
               [n].closest(".like-icon-box")
               .classList.add("liked");
