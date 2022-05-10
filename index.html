@@ -383,6 +383,11 @@
                 song.children[2].style = "margin-left: 6rem;";
               }
             });
+            _this.isLiked.forEach(function (n) {
+              $$(".like-icon--fill")
+                [n].closest(".like-icon-box")
+                .classList.add("liked");
+            });
           };
 
           // Khi song bị pause
