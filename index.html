@@ -495,12 +495,10 @@
               const likeSongBox = e.target.closest(".like-icon-box");
               if (likeSongBox) {
                 likeSongBox.classList.toggle("liked");
-                const likedSongIndex = Number(
-                  e.target.closest(".song").dataset.index
-                );
+                const likedSongIndex = e.target.closest(".song").dataset.index;
                 if (!likeSongBox.classList.contains("liked")) {
                   _this.isLiked = _this.isLiked.filter(
-                    (n) => n !== likedSongIndex
+                    (n) => n != likedSongIndex
                   );
                 } else {
                   _this.isLiked.push(likedSongIndex);
@@ -521,6 +519,7 @@
           this.isRepeat = this.config.isRepeat;
           this.audioVolume = this.config.volume;
           this.isLightMode = this.config.isLightMode;
+          // for (let n of new Set(this.config.isLiked)) this.isLiked.push(n);
           this.isLiked = this.config.isLiked;
         },
         scrollSongIntoView: function () {
