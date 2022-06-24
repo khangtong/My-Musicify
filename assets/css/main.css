@@ -560,15 +560,15 @@ body.light-mode .song {
 }
 
 .line--1 {
-  animation: dance 1.75s ease infinite 0.1s;
+  animation: dance 0.7s ease-in-out infinite 0.1s;
 }
 
 .line--2 {
-  animation: dance 1.75s ease infinite 0.6s;
+  animation: dance 0.7s ease-in-out infinite 0.6s;
 }
 
 .line--3 {
-  animation: dance 1.75s ease infinite 1s;
+  animation: dance 0.7s ease-in-out infinite 1s;
 }
 
 .song .thumb {
