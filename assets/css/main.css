@@ -539,7 +539,7 @@ body.light-mode .song {
   height: var(--line-dance-height);
   width: 1rem;
   background-image: linear-gradient(to top, #ecf0f1, #bfd7ed);
-  margin: 0.07rem;
+  margin: 0.08rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   transition: all 0.25s ease;
